@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ExcelService {
 
@@ -30,8 +31,8 @@ public class ExcelService {
     public static final String path = "/Users/yuaner/project/shujutongji/src/main/resources/数据统计{}.xlsx";
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
-//        test();
-        gaiLou();
+        test();
+//        gaiLou();
     }
 
     public static void gaiLou() {
@@ -78,7 +79,7 @@ public class ExcelService {
 
             System.out.println(huo);
         }
-        FileOutputStream outputStream = new FileOutputStream(StringUtils.replace(path, "{}", LocalDateTime.now().toString()));
+        FileOutputStream outputStream = new FileOutputStream(StringUtils.replace(path, "{}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))));
         book.write(outputStream);
         outputStream.close();
     }
