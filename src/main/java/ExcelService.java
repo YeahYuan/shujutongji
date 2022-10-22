@@ -28,7 +28,7 @@ public class ExcelService {
     public static CellStyle xingStyle;
     public static CellStyle otherStyle;
 
-    public static final String path = "/Users/yuaner/project/shujutongji/src/main/resources/数据统计{}.xlsx";
+    public static final String path = "C:\\Users\\lll\\IdeaProjects\\shujutongji\\src\\main\\resources\\数据统计{}.xlsx";
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
         test();
