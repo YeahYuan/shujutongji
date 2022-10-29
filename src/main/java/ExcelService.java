@@ -71,13 +71,18 @@ public class ExcelService {
             int seq = (int) row.getCell(0).getNumericCellValue();
             String date = row.getCell(1).getStringCellValue();
             String title = row.getCell(2).getStringCellValue();
-            int person = (int) row.getCell(3).getNumericCellValue();
+            String person = row.getCell(3).getStringCellValue();
             String url = row.getCell(4).getStringCellValue();
             String id = row.getCell(5).getStringCellValue();
             Huo huo = new Huo(seq, date, title, person, url, id);
             printOne(huo);
 
             System.out.println(huo);
+//            try {
+//                Thread.sleep(1000 * 10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         FileOutputStream outputStream = new FileOutputStream(StringUtils.replace(path, "{}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))));
         book.write(outputStream);
@@ -97,12 +102,12 @@ public class ExcelService {
             String name = obj.getJSONObject("user").getString("screen_name");
             String like = obj.getString("like_count");
             String text = obj.getString("text");
-            boolean isXing = huo.person == 1 || ((text.contains("醒") && !text.contains("远")) || text.contains("安娜") || text.contains("艾伦"));
+            boolean isXing = "单人".equals(huo.person) || ((text.contains("醒") && !text.contains("远") && !text.contains("生")) || text.contains("安娜") || text.contains("艾伦") || text.contains("猫猫"));
             XSSFRow allSheetRow = allSheet.createRow(allRow);
             allSheetRow.createCell(0).setCellValue(allRow++);
             allSheetRow.createCell(1).setCellValue(huo.date);
             allSheetRow.createCell(2).setCellValue(huo.date + huo.title);
-            allSheetRow.createCell(3).setCellValue(huo.person > 1 ? "多人" : "单人");
+            allSheetRow.createCell(3).setCellValue(huo.person);
             allSheetRow.createCell(4).setCellValue(rank);
             allSheetRow.createCell(5).setCellValue(name);
             XSSFCell cell6 = allSheetRow.createCell(6);

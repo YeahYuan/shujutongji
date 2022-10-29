@@ -2,7 +2,7 @@ class Huo {
     int seq;
     String date;
     String title;
-    int person;
+    String person;
     String url;
     String id;
 
@@ -11,7 +11,7 @@ class Huo {
         this.id = id;
     }
 
-    public Huo(int seq, String date, String title, int person, String url, String id) {
+    public Huo(int seq, String date, String title, String person, String url, String id) {
         this.seq = seq;
         this.date = date;
         this.title = title;
