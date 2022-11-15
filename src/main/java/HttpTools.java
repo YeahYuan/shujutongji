@@ -40,14 +40,13 @@ public class HttpTools {
         // 表单参数
         List<NameValuePair> nvps = new ArrayList<>();
         // POST 请求参数
-        nvps.add(new BasicNameValuePair("username", "wdbyte.com"));
-        nvps.add(new BasicNameValuePair("password", "secret"));
+        nvps.add(new BasicNameValuePair("pp_id", "8273"));
         httpPost.setEntity(new UrlEncodedFormEntity(nvps));
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
-                System.out.println(response.getVersion()); // HTTP/1.1
-                System.out.println(response.getCode()); // 200
-                System.out.println(response.getReasonPhrase()); // OK
+//                System.out.println(response.getVersion()); // HTTP/1.1
+//                System.out.println(response.getCode()); // 200
+//                System.out.println(response.getReasonPhrase()); // OK
 
                 HttpEntity entity = response.getEntity();
                 // 获取响应信息
