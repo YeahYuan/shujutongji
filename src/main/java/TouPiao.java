@@ -10,18 +10,25 @@ public class TouPiao {
             String resStr = HttpTools.post(urlParam);
             JSONObject strJson = JSONObject.parseObject(resStr);
             JSONArray jsonArray = strJson.getJSONObject("data").getJSONArray("vote-item");
-
-            System.out.println(
-                    LocalDateTime.now() + "\t" +
-                    jsonArray.getJSONObject(0).getString("title") + "\t" + jsonArray.getJSONObject(0).getString("voteCount") + "\t" +
-                    jsonArray.getJSONObject(1).getString("title") + "\t" + jsonArray.getJSONObject(1).getString("voteCount") + "\t" +
-                    jsonArray.getJSONObject(2).getString("title") + "\t" + jsonArray.getJSONObject(2).getString("voteCount") + "\t" +
-                    jsonArray.getJSONObject(3).getString("title") + "\t" + jsonArray.getJSONObject(3).getString("voteCount") + "\t" +
-                    jsonArray.getJSONObject(4).getString("title") + "\t" + jsonArray.getJSONObject(4).getString("voteCount")
-            );
+            System.out.print(LocalDateTime.now() + "\t");
+            printOne(jsonArray, "刘雨昕");
+            printOne(jsonArray, "伯远");
+            printOne(jsonArray, "苏醒");
+            printOne(jsonArray, "张远");
+            printOne(jsonArray, "李汶翰");
+            System.out.println("");
 
 //            Thread.sleep(1000);
-            Thread.sleep(1000 * 60 * 10);
+            Thread.sleep(1000 * 60);
+        }
+    }
+
+    private static void printOne(JSONArray jsonArray, String name) {
+        for (int i = 0; i < 5; i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            if (jsonObject.getString("title").contains(name)) {
+                System.out.print(jsonObject.getString("voteCount") + "\t");
+            }
         }
     }
 
