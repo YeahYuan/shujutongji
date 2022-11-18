@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 public class WeiDianXiaoLiang {
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
+    private static final int TOTAL_STOCK = 9999;
+    private static int total = 0;
     public static void main(String[] args) throws InterruptedException {
         String urlParam = "https://thor.weidian.com/detail/getItemSkuInfo/1.0?param=%7B%22itemId%22%3A%225824125384%22%7D&wdtoken=24fd0bc9&_=1668703085412";
         while (true) {
@@ -17,11 +19,20 @@ public class WeiDianXiaoLiang {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 printOne(jsonObject);
             }
-            System.out.println();
+            System.out.println(total);
+            total = 0;
             Thread.sleep(1000 * 60);
         }
     }
     private static void printOne(JSONObject jsonObject) {
-        System.out.print(jsonObject.getJSONObject("skuInfo").getString("stock") + "\t");
+        JSONObject skuInfo = jsonObject.getJSONObject("skuInfo");
+        int stock = Integer.parseInt(skuInfo.getString("stock"));
+        int sold = TOTAL_STOCK - stock;
+        if (skuInfo.getString("title").contains("C")) {
+            total = total + (2 * sold);
+        } else {
+            total = total + sold;
+        }
+        System.out.print(sold + "\t");
     }
 }
