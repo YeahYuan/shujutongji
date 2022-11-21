@@ -78,11 +78,6 @@ public class ExcelService {
             printOne(huo);
 
             System.out.println(huo);
-//            try {
-//                Thread.sleep(1000 * 10);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         }
         FileOutputStream outputStream = new FileOutputStream(StringUtils.replace(path, "{}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))));
         book.write(outputStream);
@@ -102,7 +97,8 @@ public class ExcelService {
             String name = obj.getJSONObject("user").getString("screen_name");
             String like = obj.getString("like_count");
             String text = obj.getString("text");
-            boolean isXing = "单人".equals(huo.person) || ((text.contains("醒") && !text.contains("远") && !text.contains("生")) || text.contains("安娜") || text.contains("艾伦") || text.contains("猫猫"));
+            boolean isXing = "单人".equals(huo.person) || ((text.contains("醒") && !text.contains("张远") && !text.contains("楚生"))
+                    || text.contains("安娜") || text.contains("艾伦") || text.contains("猫猫") || text.contains("苏导"));
             XSSFRow allSheetRow = allSheet.createRow(allRow);
             allSheetRow.createCell(0).setCellValue(allRow++);
             allSheetRow.createCell(1).setCellValue(huo.date);

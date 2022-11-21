@@ -10,12 +10,12 @@ public class TouPiao {
             String resStr = HttpTools.post(urlParam);
             JSONObject strJson = JSONObject.parseObject(resStr);
             JSONArray jsonArray = strJson.getJSONObject("data").getJSONArray("vote-item");
-            System.out.print(LocalDateTime.now() + "\t");
+            System.out.print(LocalDateTime.now().format(Consts.DF) + "\t");
             printOne(jsonArray, "刘雨昕");
             printOne(jsonArray, "伯远");
             printOne(jsonArray, "苏醒");
             printOne(jsonArray, "张远");
-            printOne(jsonArray, "李汶翰");
+            printOne(jsonArray, "王源");
             System.out.println("");
 
 //            Thread.sleep(1000);
