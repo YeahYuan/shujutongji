@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class WeiDianXiaoLiang {
+public class WeiDianXiaoLiang_Niao {
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss");
-    private static final int A_STOCK = 1109;
+    private static final int A_STOCK = 999;
     private static final int B_STOCK = 999;
-    private static final int C_STOCK = 5199;
+    private static final int C_STOCK = 6399;
     private static int total = 0;
     public static void main(String[] args) throws InterruptedException {
-        String urlParam = "https://thor.weidian.com/detail/getItemSkuInfo/1.0?param=%7B%22itemId%22%3A%225824125384%22%7D&wdtoken=24fd0bc9&_=1668703085412";
+        String urlParam = "https://thor.weidian.com/detail/getItemSkuInfo/1.0?param=%7B%22itemId%22%3A%225824196578%22%7D&wdtoken=36b629f3&_=1668915120146";
         while (true) {
             String resStr = HttpTools.get(urlParam);
             JSONObject strJson = JSONObject.parseObject(resStr);
