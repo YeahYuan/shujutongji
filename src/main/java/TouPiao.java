@@ -19,12 +19,12 @@ public class TouPiao {
             System.out.println("");
 
 //            Thread.sleep(1000);
-            Thread.sleep(1000 * 60);
+            Thread.sleep(1000 * 60 * 60);
         }
     }
 
     private static void printOne(JSONArray jsonArray, String name) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             if (jsonObject.getString("title").contains(name)) {
                 System.out.print(jsonObject.getString("voteCount") + "\t");

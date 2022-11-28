@@ -23,7 +23,7 @@ public class WeiDianXiaoLiang_Niao {
             }
             System.out.println(total);
             total = 0;
-            Thread.sleep(1000 * 60 * 5);
+            Thread.sleep(1000 * 60 * 60);
         }
     }
     private static void printOne(JSONObject jsonObject) {
