@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
+import tool.HttpTools;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ public class ExcelService {
     public static CellStyle xingStyle;
     public static CellStyle otherStyle;
 
-    public static final String path = "C:\\Users\\lll\\IdeaProjects\\shujutongji\\src\\main\\resources\\数据统计{}.xlsx";
+    public static final String path = "E:\\project\\shujutongji\\src\\main\\resources\\数据统计{}.xlsx";
 
     public static void main(String[] args) throws IOException, InvalidFormatException {
         test();
@@ -75,8 +76,12 @@ public class ExcelService {
             String url = row.getCell(4).getStringCellValue();
             String id = row.getCell(5).getStringCellValue();
             Huo huo = new Huo(seq, date, title, person, url, id);
-            printOne(huo);
-
+            try {
+                printOne(huo);
+            } catch (Exception e) {
+                System.out.println(huo + "出错啦");
+                continue;
+            }
             System.out.println(huo);
         }
         FileOutputStream outputStream = new FileOutputStream(StringUtils.replace(path, "{}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))));
@@ -97,8 +102,10 @@ public class ExcelService {
             String name = obj.getJSONObject("user").getString("screen_name");
             String like = obj.getString("like_count");
             String text = obj.getString("text");
-            boolean isXing = "单人".equals(huo.person) || ((text.contains("醒") && !text.contains("张远") && !text.contains("楚生"))
-                    || text.contains("安娜") || text.contains("艾伦") || text.contains("猫猫") || text.contains("苏导"));
+            boolean isXing = "单人".equals(huo.person) || ((text.contains("醒") || text.contains("安娜")
+                    || text.contains("艾伦") || text.contains("猫猫") || text.contains("苏导") || text.contains("店长")
+                    || org.apache.commons.lang3.StringUtils.containsIgnoreCase(text, "allen"))
+                    && !text.contains("张远") && !text.contains("楚生") && !text.contains("醒远") && !text.contains("楚苏"));
             XSSFRow allSheetRow = allSheet.createRow(allRow);
             allSheetRow.createCell(0).setCellValue(allRow++);
             allSheetRow.createCell(1).setCellValue(huo.date);
@@ -113,26 +120,6 @@ public class ExcelService {
             cell7.setCellValue(text);
             cell7.setCellStyle(isXing ? xingStyle : otherStyle);
             allSheetRow.setRowStyle(isXing ? xingStyle : otherStyle);
-
-//            if (isXing) {
-//                XSSFRow xingSheetRow = xingSheet.createRow(xingRow++);
-//                xingSheetRow.createCell(0).setCellValue(huo.date);
-//                xingSheetRow.createCell(1).setCellValue(huo.title);
-//                xingSheetRow.createCell(2).setCellValue(rank);
-//                xingSheetRow.createCell(3).setCellValue(name);
-//                xingSheetRow.createCell(4).setCellValue(like);
-//                xingSheetRow.createCell(5).setCellValue(text);
-//            }
-//            if (huo.person > 1) {
-//                XSSFRow duoRenSheetRow = duoRenSheet.createRow(duoRenRow++);
-//                duoRenSheetRow.setRowStyle(isXing ? xingStyle : otherStyle);
-//                duoRenSheetRow.createCell(0).setCellValue(huo.date);
-//                duoRenSheetRow.createCell(1).setCellValue(huo.title);
-//                duoRenSheetRow.createCell(2).setCellValue(rank);
-//                duoRenSheetRow.createCell(3).setCellValue(name);
-//                duoRenSheetRow.createCell(4).setCellValue(like);
-//                duoRenSheetRow.createCell(5).setCellValue(text);
-//            }
         }
     }
 
